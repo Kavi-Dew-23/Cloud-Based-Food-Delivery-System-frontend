@@ -1,0 +1,36 @@
+﻿.dashboard-container{
+    display:grid;
+    grid-template-columns: repeat(3,1fr); /*3 cards per row*/
+    justify-content:center;
+    gap:5px;
+    margin:0px auto;
+}
+.card {
+    background-color: #f6e1d2;
+    padding:5px;
+    border-radius:6px;
+}
+.card h2{
+    font-family:'Lucida Bright';
+    font-size:18px;
+    font-weight:bold;
+    padding:10px;
+}
+.list-box {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 12px; /* GAP between items */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-top:5px;
+}
+.icon{
+    width:30px;
+    height:30px;
+    margin-right:10px;
+    border-radius:50%;
+}

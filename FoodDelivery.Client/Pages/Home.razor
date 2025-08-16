@@ -1,10 +1,62 @@
 ﻿@page "/"
+@using FoodDelivery.Client.Models
+<link href="/css/styles.css" rel="stylesheet" />
 
+<div class="dashboard-container">
+    <!--Order Overview-->
+    <div class="card">
+        <h2>Orders Overview</h2>
+        @foreach (var order in Orders)
+        {
+            <div class="list-box">
+                <span>@order.OrderId</span>
+                <span>@order.Status</span>
+            </div>
+        }
+    </div>
+    <!--Favorite Restaurant-->
+    <div class="card">
+        <h2>Favorite Restaurant</h2>
+        @foreach(var restuarant in Restaurants)
+        {
+            <div class="list-box">
+                <img src="@restuarant.ImageUrl" alt="@restuarant.Name" class="icon"/>
+                <span>@restuarant.Name</span>
+            </div>
+        }
+    </div>
 
-<h1>Food Delivery System</h1>
-
+    <!--Mostly Selceted Dishes-->
+    <div class="card">
+        <h2>Mostly Selected Dishes</h2>
+        @foreach (var dish in Dishes)
+        {
+            <div class="list-box">
+                <img src="@dish.ImageUrl" alt="@dish.Name" class="icon"/>
+                <span>@dish.Name</span>
+            </div>
+        }
+    </div>
+</div>
 
 @code {
-    
+    private List<Order> Orders = new()
+    {
+        new Order { OrderId = "Order#12345", Status = "Delivered"},
+        new Order { OrderId = "Order#12346", Status = "In Transit"},
+        new Order { OrderId = "Order#12347", Status = "Preparing"},
+    };
+    private List<Restaurant> Restaurants = new()
+    {
+        new Restaurant { Name = "Madeena Beach Hotel", ImageUrl="images/Madeena.svg"},
+        new Restaurant { Name = "KFC", ImageUrl="images/KFC.svg"},
+        new Restaurant { Name = "Pizza Hut", ImageUrl="images/PizzaHut.svg"},
 
+    };
+    private List<Dish> Dishes = new()
+    {
+        new Dish { Name = "Pot biriyani", ImageUrl = "images/Madeena.svg"},
+        new Dish { Name = "Pepperoni Pizza", ImageUrl = "images/Pepperoni.svg"},
+        new Dish { Name = "Hot Silencer Burger", ImageUrl = "images/StreetBurger.svg"},
+    };
 }
