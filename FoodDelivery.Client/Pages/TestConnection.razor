@@ -1,0 +1,16 @@
+﻿@page "/test"
+@using FoodDelivery.Client.Services
+@inject OrderService OrderService
+
+<h3>Backend Connection Test</h3>
+
+<pre>@status</pre>
+
+@code {
+    private string status = "Testing...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        status = await OrderService.GetStatusAsync();
+    }
+}
