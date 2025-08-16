@@ -1,16 +1,28 @@
 ﻿@page "/test"
 @using FoodDelivery.Client.Services
 @inject OrderService OrderService
+@inject RestaurantService RestaurantService
+@inject UserService UserService
+@inject DeliveryService DeliveryService
 
 <h3>Backend Connection Test</h3>
 
 <pre>@status</pre>
-
+<pre>@status1</pre>
+<pre>@status2</pre>
+<pre>@status3</pre>
 @code {
     private string status = "Testing...";
+    private string status1 = "Testing1...";
+    private string status2 = "Testing2...";
+    private string status3 = "Testing3...";
 
     protected override async Task OnInitializedAsync()
     {
         status = await OrderService.GetStatusAsync();
+        status1 = await RestaurantService.GetStatusAsync();
+        status2 = await UserService.GetStatusAsync();
+        status3 = await DeliveryService.GetStatusAsync();
+
     }
 }

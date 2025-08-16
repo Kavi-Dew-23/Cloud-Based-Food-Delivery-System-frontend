@@ -1,16 +1,10 @@
 ﻿@page "/"
-@using FoodDelivery.Client.Services
-@inject OrderService OrderService
+
 
 <h1>Food Delivery System</h1>
 
-<p>@message</p>
 
-<button @onclick="CheckOrderService">Check Order Service</button>
 @code {
-    private string message = "Test API";
-     private async Task CheckOrderService()
-    {
-         message = await OrderService.GetStatusAsync();
-    }
+    
+
 }

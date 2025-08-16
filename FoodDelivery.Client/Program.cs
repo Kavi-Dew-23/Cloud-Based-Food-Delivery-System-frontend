@@ -9,6 +9,11 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<RestaurantService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<DeliveryService>();
+
+
 builder.Services.AddScoped(sp => new HttpClient { 
     BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
 });
