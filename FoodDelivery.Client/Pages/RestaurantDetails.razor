@@ -1,4 +1,5 @@
 ﻿@page "/restaurantDetails/{Id:int}"
+@using FoodDelivery.Client.Models
 @using FoodDelivery.Client.Services
 @inject IRestaurantService RestaurantService
 
@@ -16,27 +17,64 @@ else
             <h1>@restaurant.Name</h1>
         </div>
     </div>
-    
 
-    <!--Menu Categories-->
+    <!--Menu Categories tabs-->
+        @if(restaurant.MenuCategories.Any())
+        {
+            <div class="category-tabs">
+                @foreach (var category in restaurant.MenuCategories)
+                {
+                    <button class="@GetTabClass(category)" @onclick="() => SelectCategory(category)">
+                        @category.Name
+                    </button>
+                }
+            </div>
+        }
     <div class="menu-categories">
-        @foreach(var category in restaurant.MenuCategories)
+        @if(restaurant.MenuCategories.Any())
         {
             <div class="menu-category">
-                <h2>@category.Name</h2>
 
-                <div class="menu-items">
-                    @foreach(var items in category.MenuItems)
-                    {
-                        <div class="menu-item">
-                            <div class="item-info">
-                                <h3>@items.Name</h3>
-                                <p>@items.Description</p>
-                                <p>LKR @items.Price</p>
-                            </div>
-                        </div>
-                    }
+
+                <!--Menu items for selected category-->
+                <div class="menu-category-content">
+
+
+                    <div class="menu-items-grid">
+                        @if (selectedCategory != null)
+                        {
+                            @foreach (var items in selectedCategory.MenuItems)
+                            {
+                                <div class="menu-item-card">
+                                    <div class="menu-card">
+                                        <div class="item-info">
+                                            <h3>@items.Name</h3>
+                                            <p class="item-description">@items.Description</p>
+                                            <p>LKR @items.Price</p>
+                                        </div>
+                                        <div class="menu-item-image">
+                                            <img src="/images/PizzaHut.svg" alt="pizza image" />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>Select a category to view items</p>
+                        }
+                    </div>
+
                 </div>
+            </div>
+        }
+            
+        
+        else
+        {
+            <div class="no-menu">
+                <p>No menu available..</p>
             </div>
         }
     </div>
@@ -46,10 +84,27 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    private Restaurant restaurant; 
+    private Restaurant restaurant;
+    private MenuCategory selectedCategory;
 
     protected override async Task OnParametersSetAsync()
     {
         restaurant = await RestaurantService.GetRestaurantByIdAsync(Id);
+
+        //select the first category by default
+        if(restaurant?.MenuCategories?.Any() == true)
+        {
+            selectedCategory = restaurant.MenuCategories.First();
+        }
+    }
+
+    private void SelectCategory(MenuCategory category)
+    {
+        selectedCategory = category;
+    }
+
+    private string GetTabClass(MenuCategory category)
+    {
+        return category == selectedCategory ? "active-tab" : "inactive-tab";
     }
 }
