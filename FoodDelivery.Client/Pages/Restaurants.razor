@@ -1,7 +1,7 @@
 ﻿@page "/restaurant"
 @using FoodDelivery.Client.Models
 <link href="/css/styles.css" rel="stylesheet" />
-
+@inject NavigationManager NavigationManager
 
 <div class="top-row px-3 py-3">
     <h1 class="top-row-heading">Restaurants</h1>
@@ -9,30 +9,55 @@
 </div>
 
 <div class="restaurant-container">
-    
-        @foreach (var resturant in AllResturants)
-        {
-        <div class="rest-card">
+
+    @foreach (var resturant in AllResturants)
+    {
+        <div class="rest-card" @onclick="() => NavigateToRestaurant(resturant.Id)">
             <div class="rest-card-content">
                 <img src="@resturant.ImageUrl" alt="@resturant.Name" />
                 <h2>@resturant.Name</h2>
             </div>
         </div>
-        }
-        
+    }
 
-    
+
+
 </div>
 
 @code {
     private List<Restaurant> AllResturants = new()
     {
-        new Restaurant { Name = "Pizza hut", ImageUrl="images/PizzaHut.svg"},
-        new Restaurant { Name = "Burger King", ImageUrl="images/BurgerKing.svg"},
-        new Restaurant { Name = "Hotel Hasara", ImageUrl="images/HotelHasara.svg"},
-        new Restaurant { Name = "KFC", ImageUrl="images/KFC.svg"},
-        new Restaurant { Name = "Madeena Beach Hotel", ImageUrl="images/Madeena.svg"},
+        new Restaurant {
+            Id = 1,
+            Name = "Pizza hut", 
+            ImageUrl="images/PizzaHut.svg"
+        },
+        new Restaurant { 
+            Id = 2,
+            Name = "Burger King",
+            ImageUrl="images/BurgerKing.svg"
+        },
+        new Restaurant { 
+            Id = 3,
+            Name = "Hotel Hasara", 
+            ImageUrl="images/HotelHasara.svg"
+        },
+        new Restaurant {
+            Id = 4,
+            Name = "KFC",
+            ImageUrl="images/KFC.svg"
+        },
+        new Restaurant { 
+            Id = 5,
+            Name = "Madeena Beach Hotel",
+            ImageUrl="images/Madeena.svg"
+        },
 
     };
+
+    private void NavigateToRestaurant(int Id)
+    {
+        NavigationManager.NavigateTo($"/restaurantDetails/{Id}");
+    }
 
 }

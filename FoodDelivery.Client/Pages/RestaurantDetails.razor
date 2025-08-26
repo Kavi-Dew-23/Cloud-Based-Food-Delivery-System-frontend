@@ -1,0 +1,55 @@
+﻿@page "/restaurantDetails/{Id:int}"
+@using FoodDelivery.Client.Services
+@inject IRestaurantService RestaurantService
+
+<link href="/css/styles.css" rel="stylesheet" />
+
+
+@if(restaurant == null)
+{
+    <p>Loading Restaurants..</p>
+}
+else
+{
+    <div class="top-row-restaurantDetails px-3 py-3">
+        <div class="restaurant-header">
+            <h1>@restaurant.Name</h1>
+        </div>
+    </div>
+    
+
+    <!--Menu Categories-->
+    <div class="menu-categories">
+        @foreach(var category in restaurant.MenuCategories)
+        {
+            <div class="menu-category">
+                <h2>@category.Name</h2>
+
+                <div class="menu-items">
+                    @foreach(var items in category.MenuItems)
+                    {
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <h3>@items.Name</h3>
+                                <p>@items.Description</p>
+                                <p>LKR @items.Price</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Restaurant restaurant; 
+
+    protected override async Task OnParametersSetAsync()
+    {
+        restaurant = await RestaurantService.GetRestaurantByIdAsync(Id);
+    }
+}
