@@ -22,5 +22,13 @@ public class MenuItem
     public string ImageUrl { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }
+    public List<MenuItemSize> MenuItemSizes { get; set; } = new List<MenuItemSize>();
+}
+
+public class MenuItemSize
+{
+    public int SizeId { get; set; }
+    public string SizeName { get; set; }
+    public double SizePrice { get; set; }
 }
 

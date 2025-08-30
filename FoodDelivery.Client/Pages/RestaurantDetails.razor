@@ -1,10 +1,11 @@
 ﻿@page "/restaurantDetails/{Id:int}"
+@using FoodDelivery.Client.Components
 @using FoodDelivery.Client.Models
 @using FoodDelivery.Client.Services
 @inject IRestaurantService RestaurantService
 
 <link href="/css/styles.css" rel="stylesheet" />
-
+<MenuItemDialog @ref="menuItemDialog" Onclose="OnMenuDialogClose"/>
 
 @if(restaurant == null)
 {
@@ -45,15 +46,16 @@ else
                         {
                             @foreach (var items in selectedCategory.MenuItems)
                             {
-                                <div class="menu-item-card">
+                                <div class="menu-item-card" @onclick="() => OpenMenuDialog(items)">
                                     <div class="menu-card">
                                         <div class="item-info">
                                             <h3>@items.Name</h3>
                                             <p class="item-description">@items.Description</p>
-                                            <p>LKR @items.Price</p>
+                                            <p>LKR @items.Price.ToString("0.00")</p>
                                         </div>
                                         <div class="menu-item-image">
-                                            <img src="/images/PizzaHut.svg" alt="pizza image" />
+                                            <img src="@items.ImageUrl" alt="@items.Name" />
+                                            
                                         </div>
                                     </div>
                                     
@@ -86,6 +88,7 @@ else
 
     private Restaurant restaurant;
     private MenuCategory selectedCategory;
+    private MenuItemDialog menuItemDialog;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -106,5 +109,13 @@ else
     private string GetTabClass(MenuCategory category)
     {
         return category == selectedCategory ? "active-tab" : "inactive-tab";
+    }
+    private void OpenMenuDialog(MenuItem menuItem)
+    {
+        menuItemDialog.Show(menuItem);
+    }
+    private void OnMenuDialogClose()
+    {
+        Console.WriteLine("Menu Dialog closed");
     }
 }

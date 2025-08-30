@@ -1,0 +1,93 @@
+﻿@using FoodDelivery.Client.Models
+
+
+<div class="dialog-box @(isVisible ? "show" : "hide")">
+
+    <div class="dialogbox-content">
+        <span class="close-button" @onclick="Close">&times;</span>
+        @if (SelectedMenuItem != null)
+        {
+            <div class="dialog-header">
+                <h2>@SelectedMenuItem.Name</h2>
+
+            </div>
+            <div class="dialog-body">
+                <div class="dialog-box-left">
+                    <img src="@SelectedMenuItem.ImageUrl" alt="@SelectedMenuItem.Name" class="dialog-image" />
+                </div>
+                <div class="dialog-box-right">
+                    <p>@SelectedMenuItem.Description</p>
+                    <h4>Choice of Size</h4>
+                    @if (SelectedMenuItem.MenuItemSizes?.Any() == true)
+                    {
+                        @foreach (var size in SelectedMenuItem.MenuItemSizes)
+                        {
+                            <div class="size-option" @onclick="() => SelectSize(size)">
+                                <input type="checkbox" id="@size.SizeName" checked="@(SelectedSizeId == size.SizeId)"
+                                        />
+                                <div class="size-checkbox">
+                                    <label>@size.SizeName</label>
+                                    <label> LKR @size.SizePrice.ToString("0.00")</label>
+                                </div>
+                                
+    
+                            </div>
+                            
+                            
+                            
+                        }
+                    }
+                    @if(SelectedSize != null)
+                    {
+                        <button class="add-to-cart">Add to Cart LKR @SelectedSize.SizePrice.ToString("0.00")</button>
+                    }
+                    else
+                    {
+                        <button class="add-to-cart">Select a Size</button>
+                    }
+                </div>
+                
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+
+    private bool isVisible { get; set; }
+    private MenuItem SelectedMenuItem;
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+    private MenuItemSize SelectedSize;
+    private int? SelectedSizeId;
+
+    public void Show(MenuItem menuItem)
+    {
+        SelectedMenuItem = menuItem;
+        isVisible = true;
+        StateHasChanged();
+    }
+    private async Task Close()
+    {
+        isVisible = false;
+        await OnClose.InvokeAsync(null);
+        StateHasChanged();
+    }
+    private void SelectSize(MenuItemSize menuItemSize)
+    {
+        if(SelectedSizeId == menuItemSize.SizeId)
+        {
+            // unchecking the box if already selected
+            SelectedSizeId = null;
+            SelectedSize = null;
+        }
+        else
+        {
+            SelectedSizeId = menuItemSize.SizeId;
+            SelectedSize = menuItemSize;
+        }
+    }
+
+}
+
