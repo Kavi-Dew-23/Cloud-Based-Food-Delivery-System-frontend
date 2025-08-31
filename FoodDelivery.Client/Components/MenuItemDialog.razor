@@ -39,19 +39,24 @@
                     }
                     @if(SelectedSize != null)
                     {
-                        <button class="add-to-cart">Add to Cart LKR @SelectedSize.SizePrice.ToString("0.00")</button>
+                        <button class="add-to-cart" @onclick="AddtoCart">Add to Cart LKR @SelectedSize.SizePrice.ToString("0.00")</button>
                     }
                     else
                     {
                         <button class="add-to-cart">Select a Size</button>
                     }
+                   
+                    
                 </div>
                 
             </div>
         }
     </div>
 </div>
-
+@if (showSuccessMessage)
+{
+    <div class="success-message">Item Added to Cart Succesfully</div>
+}
 
 @code {
 
@@ -61,6 +66,8 @@
     public EventCallback OnClose { get; set; }
     private MenuItemSize SelectedSize;
     private int? SelectedSizeId;
+    private bool showSuccessMessage;
+
 
     public void Show(MenuItem menuItem)
     {
@@ -86,6 +93,20 @@
         {
             SelectedSizeId = menuItemSize.SizeId;
             SelectedSize = menuItemSize;
+        }
+    }
+
+    private async Task AddtoCart()
+    {
+        if(SelectedSize != null)
+        {
+            showSuccessMessage = true;
+            StateHasChanged();
+
+            // hide success message after 2 seconds
+            await Task.Delay(2000);
+            showSuccessMessage = false;
+            StateHasChanged();
         }
     }
 
