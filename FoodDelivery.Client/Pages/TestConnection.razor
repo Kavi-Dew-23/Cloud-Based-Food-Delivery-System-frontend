@@ -19,7 +19,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        status = await OrderService.GetStatusAsync();
+        //status = await OrderService.GetStatusAsync();
         status1 = await RestaurantService.GetStatusAsync();
         status2 = await UserService.GetStatusAsync();
         status3 = await DeliveryService.GetStatusAsync();

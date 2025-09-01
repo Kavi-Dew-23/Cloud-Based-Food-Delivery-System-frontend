@@ -76,3 +76,21 @@ main {
         padding-right: 1.5rem !important;
     }
 }
+.cart-container {
+    position:relative;
+    display:inline-block;
+}
+.cart-badge {
+    position: absolute;
+    top:-5px;
+    right:-15px;
+    background-color: palegreen;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}

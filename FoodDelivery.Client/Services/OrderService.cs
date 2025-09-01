@@ -6,25 +6,60 @@ namespace FoodDelivery.Client.Services
 {
     public class OrderService
     {
-        public readonly HttpClient _http;
+        public event Action OnChange;
+        private readonly List<MenuItemSize> cartItems = new();
 
-        public OrderService(HttpClient http)
+        // Add items to cart
+        public void AddToCart(MenuItemSize item)
         {
+            cartItems.Add(item);
+            NotifyStateChanged();
+        }
 
-            _http = http;
-        }
-        public async Task<string> GetStatusAsync()
+        //remove items from cart
+        public void RemoveFromCart(MenuItemSize item)
         {
-            try
-            {
-                // Use absolute path to avoid routing conflicts
-                var response = await _http.GetAsync("http://localhost/order/api/status");
-                return await response.Content.ReadAsStringAsync();
-            }
-            catch (Exception ex)
-            {
-                return $"Connection failed: {ex.Message}";
-            }
+            cartItems.Remove(item);
+            NotifyStateChanged();
         }
+
+        public int GetCartItemsCount()
+        {
+            return cartItems.Count;
+        }
+
+        public List<MenuItemSize> GetCartItems()
+        {
+            return cartItems;
+        }
+        private void NotifyStateChanged() => OnChange?.Invoke();
+ }
+}
+
+
+/*
+public readonly HttpClient _http;
+
+public OrderService(HttpClient http)
+{
+
+    _http = http;
+}
+
+
+ * check the status of the order service
+public async Task<string> GetStatusAsync()
+{
+    try
+    {
+        // Use absolute path to avoid routing conflicts
+        var response = await _http.GetAsync("http://localhost/order/api/status");
+        return await response.Content.ReadAsStringAsync();
+    }
+    catch (Exception ex)
+    {
+        return $"Connection failed: {ex.Message}";
     }
 }
+*/
+

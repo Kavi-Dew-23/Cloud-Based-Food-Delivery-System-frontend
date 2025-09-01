@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using FoodDelivery.Client.Services
+@inject OrderService OrderService
+
+@inherits LayoutComponentBase
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -6,7 +9,13 @@
 
     <main>
         <div class="top-row px-4">
-            <img src="/images/Cart.svg" alt="Cart Icon" style="cursor:pointer"/>
+            <div class="cart-container" style="position:relative; display:inline-block">
+                <img src="/images/Cart.svg" alt="Cart Icon" style="cursor:pointer" />
+                @if (cartItemsCount > 0)
+                {
+                    <span class="cart-badge" style="">@cartItemsCount</span>    
+                }
+            </div>
             <img src="/images/Notification.svg" alt="Notification Icon" style="cursor:pointer" />
             <img src="/images/Settings.svg" alt="Settings Icon" style="cursor:pointer" />
             <img src="/images/User.svg" alt="User Icon" style="cursor:pointer" />
@@ -18,3 +27,23 @@
         </article>
     </main>
 </div>
+
+@code {
+    private int cartItemsCount;
+
+    protected override void OnInitialized()
+    {
+        cartItemsCount = OrderService.GetCartItemsCount();
+        OrderService.OnChange += UpdateCartItemsCount;
+    }
+
+    private void UpdateCartItemsCount()
+    {
+        cartItemsCount = OrderService.GetCartItemsCount();
+        InvokeAsync(StateHasChanged);
+    }
+    public void Dispose()
+    {
+        OrderService.OnChange -= UpdateCartItemsCount;    
+    }
+}

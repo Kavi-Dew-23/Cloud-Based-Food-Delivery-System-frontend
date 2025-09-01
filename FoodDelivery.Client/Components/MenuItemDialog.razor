@@ -1,4 +1,6 @@
 ﻿@using FoodDelivery.Client.Models
+@using FoodDelivery.Client.Services
+@inject OrderService OrderService
 
 
 <div class="dialog-box @(isVisible ? "show" : "hide")">
@@ -100,6 +102,9 @@
     {
         if(SelectedSize != null)
         {
+            // add to order service
+            OrderService.AddToCart(SelectedSize);
+
             showSuccessMessage = true;
             StateHasChanged();
 
