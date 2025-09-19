@@ -1,4 +1,4 @@
-﻿@using FoodDelivery.Client.Models
+﻿﻿@using FoodDelivery.Client.Models
 @using FoodDelivery.Client.Services
 @inject OrderService OrderService
 
@@ -25,21 +25,20 @@
                         @foreach (var size in SelectedMenuItem.MenuItemSizes)
                         {
                             <div class="size-option" @onclick="() => SelectSize(size)">
-                                <input type="checkbox" id="@size.SizeName" checked="@(SelectedSizeId == size.SizeId)"
-                                        />
+                                <input type="checkbox" id="@size.SizeName" checked="@(SelectedSizeId == size.SizeId)" />
                                 <div class="size-checkbox">
                                     <label>@size.SizeName</label>
                                     <label> LKR @size.SizePrice.ToString("0.00")</label>
                                 </div>
-                                
-    
+
+
                             </div>
-                            
-                            
-                            
+
+
+
                         }
                     }
-                    @if(SelectedSize != null)
+                    @if (SelectedSize != null)
                     {
                         <button class="add-to-cart" @onclick="AddtoCart">Add to Cart LKR @SelectedSize.SizePrice.ToString("0.00")</button>
                     }
@@ -47,10 +46,10 @@
                     {
                         <button class="add-to-cart">Select a Size</button>
                     }
-                   
-                    
+
+
                 </div>
-                
+
             </div>
         }
     </div>
@@ -85,7 +84,7 @@
     }
     private void SelectSize(MenuItemSize menuItemSize)
     {
-        if(SelectedSizeId == menuItemSize.SizeId)
+        if (SelectedSizeId == menuItemSize.SizeId)
         {
             // unchecking the box if already selected
             SelectedSizeId = null;
@@ -100,7 +99,7 @@
 
     private async Task AddtoCart()
     {
-        if(SelectedSize != null)
+        if (SelectedSize != null)
         {
             // add to order service
             OrderService.AddToCart(SelectedSize);
@@ -116,4 +115,3 @@
     }
 
 }
-

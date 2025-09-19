@@ -27,8 +27,19 @@ public class MenuItem
 
 public class MenuItemSize
 {
+    public string Name { get; set; }
     public int SizeId { get; set; }
     public string SizeName { get; set; }
     public double SizePrice { get; set; }
+    public int Quantity { get; set; } = 1;
+}
+
+public class CartItems
+{
+    public int ItemId { get; set; }
+    public string Name { get; set; }
+    public string SizeName { get; set; }
+    public double SizePrice { get; set; }
+    public int Quantity { get; set; } = 1;
 }
 

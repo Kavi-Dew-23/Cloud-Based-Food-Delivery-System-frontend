@@ -1,0 +1,57 @@
+﻿@page "/cart"
+@using FoodDelivery.Client.Services
+@inject OrderService OrderService
+@using FoodDelivery.Client.Models
+<link href="/css/styles.css" rel="stylesheet" />
+
+@if(cartItems == null || cartItems.Count == 0)
+{
+    <p>Your Cart is empty</p>
+}
+else
+{
+    <div>
+        @foreach(var item in cartItems)
+        {
+            <div class ="cart-item-card">
+                <div class="left-side">
+                    <h1>@item.Name</h1>
+                    <h2>@item.SizeName</h2>
+                    <p>Quantity: @item.Quantity</p>
+                    <p>Sub Total: LKR @( (item.SizePrice * item.Quantity).ToString("0.00") )</p>
+                </div>
+                <div class="bin">
+                    <i class="bi bi-trash-fill"></i>
+                </div>
+            </div>
+            
+            
+        }
+    
+    </div>
+
+    <div class="cart-summary">
+        <h3>Total: LKR @cartItems.Sum(i => i.SizePrice * i.Quantity).ToString("0.00")</h3>
+        <button>Check Out</button>
+    </div>
+}
+
+@code {
+    private List<MenuItemSize> cartItems = new();
+
+    protected override void OnInitialized()
+    {
+        cartItems = OrderService.GetCartItems();
+        OrderService.OnChange += RefreshCart;
+    }
+
+    private void RefreshCart()
+    {
+        cartItems = OrderService.GetCartItems();
+        InvokeAsync(StateHasChanged);
+    }
+    public void Dispose()
+    {
+        OrderService.OnChange -= RefreshCart;
+    }
+}

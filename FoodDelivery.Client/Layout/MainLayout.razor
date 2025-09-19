@@ -9,12 +9,15 @@
 
     <main>
         <div class="top-row px-4">
-            <div class="cart-container" style="position:relative; display:inline-block">
-                <img src="/images/Cart.svg" alt="Cart Icon" style="cursor:pointer" />
-                @if (cartItemsCount > 0)
-                {
-                    <span class="cart-badge" style="">@cartItemsCount</span>    
-                }
+            <div class="cart-container" style="position:relative; display:inline-block" >
+                <NavLink href="/cart">
+                    <img src="/images/Cart.svg" alt="Cart Icon" style="cursor:pointer" />
+                    @if (cartItemsCount > 0)
+                    {
+                        <span class="cart-badge" style="">@cartItemsCount</span>
+                    }
+                </NavLink>
+                
             </div>
             <img src="/images/Notification.svg" alt="Notification Icon" style="cursor:pointer" />
             <img src="/images/Settings.svg" alt="Settings Icon" style="cursor:pointer" />

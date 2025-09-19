@@ -94,18 +94,21 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Middle Eastern Chicken Kofta",
                                             SizeId = 1,
                                             SizeName = "Personal",
                                             SizePrice = 1100.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Middle Eastern Chicken Kofta",
                                             SizeId = 2,
                                             SizeName = "Medium",
                                             SizePrice = 2000.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Middle Eastern Chicken Kofta",
                                             SizeId = 3,
                                             SizeName = "Large",
                                             SizePrice = 3780.00
@@ -124,18 +127,21 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza",
                                             SizeId = 1,
                                             SizeName = "Personal",
                                             SizePrice = 1240.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza",
                                             SizeId = 2,
                                             SizeName = "Medium",
                                             SizePrice = 2220.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza",
                                             SizeId = 3,
                                             SizeName = "Large",
                                             SizePrice = 4200.00
@@ -153,18 +159,21 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Crispy Korean Chicken",
                                             SizeId = 1,
                                             SizeName = "Personal",
                                             SizePrice = 1240.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Crispy Korean Chicken",
                                             SizeId = 2,
                                             SizeName = "Medium",
                                             SizePrice = 2220.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Crispy Korean Chicken",
                                             SizeId = 3,
                                             SizeName = "Large",
                                             SizePrice = 4200.00
@@ -182,18 +191,21 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Thai Green Curry Chicken",
                                             SizeId = 1,
                                             SizeName = "Personal",
                                             SizePrice = 1240.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Thai Green Curry Chicken",
                                             SizeId = 2,
                                             SizeName = "Medium",
                                             SizePrice = 2220.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Thai Green Curry Chicken",
                                             SizeId = 3,
                                             SizeName = "Large",
                                             SizePrice = 4200.00
@@ -210,12 +222,14 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Middle Eastern Chicken Kofta - Thin Crust",
                                             SizeId = 1,
                                             SizeName = "Regular",
                                             SizePrice = 1650.00
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Middle Eastern Chicken Kofta - Thin Crust",
                                             SizeId = 2,
                                             SizeName = "Large",
                                             SizePrice = 3080.00
@@ -234,12 +248,14 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza - Thin Crust",
                                             SizeId = 1,
                                             SizeName = "Regular",
                                             SizePrice = 1760.00,
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza - Thin Crust",
                                             SizeId=2,
                                             SizeName="Large",
                                             SizePrice = 3410.00,
@@ -256,12 +272,14 @@ namespace FoodDelivery.Client.Services
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza - Thin Crust",
                                             SizeId = 1,
                                             SizeName = "Regular",
                                             SizePrice = 1760.00,
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Teriyaki Chicken Pizza - Thin Crust",
                                             SizeId=2,
                                             SizeName="Large",
                                             SizePrice = 3410.00,
@@ -272,19 +290,20 @@ namespace FoodDelivery.Client.Services
                                 {
                                     ItemId = 8,
                                     Name = "Thai Green Curry Chicken - Thin Crust",
-                                    Description = "Turn up the heat with our Thai Green Curry Chicken Pizza - a zesty green curry sauce base topped with tender green curry chicken, onions and mozzarella.",
                                     Price = 1240.00,
                                     ImageUrl = "/images/pizzahut/Thai-Green-Curry-Chicken-ThinCrust.png",
                                     MenuItemSizes = new List<MenuItemSize>
                                     {
                                         new MenuItemSize
                                         {
+                                            Name = "Thai Green Curry Chicken - Thin Crust",
                                             SizeId = 1,
                                             SizeName = "Regular",
                                             SizePrice = 1760.00,
                                         },
                                         new MenuItemSize
                                         {
+                                            Name = "Thai Green Curry Chicken - Thin Crust",
                                             SizeId=2,
                                             SizeName="Large",
                                             SizePrice = 3410.00,
