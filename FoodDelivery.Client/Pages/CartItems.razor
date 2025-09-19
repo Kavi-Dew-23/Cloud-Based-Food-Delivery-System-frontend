@@ -20,7 +20,7 @@ else
                     <p>Quantity: @item.Quantity</p>
                     <p>Sub Total: LKR @( (item.SizePrice * item.Quantity).ToString("0.00") )</p>
                 </div>
-                <div class="bin">
+                <div class="bin" @onclick="() => RemoveItem(item)">
                     <i class="bi bi-trash-fill"></i>
                 </div>
             </div>
@@ -53,5 +53,11 @@ else
     public void Dispose()
     {
         OrderService.OnChange -= RefreshCart;
+    }
+
+    // Remove the item from cart
+    public void RemoveItem(MenuItemSize item)
+    {
+        OrderService.RemoveFromCart(item.SizeId, item.SizeName);
     }
 }

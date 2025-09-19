@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace FoodDelivery.Client.Services
 {
@@ -9,7 +10,6 @@ namespace FoodDelivery.Client.Services
         public event Action OnChange;
         private readonly List<MenuItemSize> cartItems = new();
 
-        // Add items to cart
         public void AddToCart(MenuItemSize item)
         {
             cartItems.Add(item);
@@ -17,10 +17,15 @@ namespace FoodDelivery.Client.Services
         }
 
         //remove items from cart
-        public void RemoveFromCart(MenuItemSize item)
+        public void RemoveFromCart(int SizeId, string SizeName)
         {
-            cartItems.Remove(item);
-            NotifyStateChanged();
+            var item = cartItems.FirstOrDefault(r => r.SizeId == SizeId && r.SizeName == SizeName);
+            if(item != null)
+            {
+                cartItems.Remove(item);
+                NotifyStateChanged();
+            }
+            
         }
 
         public int GetCartItemsCount()
